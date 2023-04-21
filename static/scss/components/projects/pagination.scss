@@ -1,0 +1,43 @@
+@use '../../utils' as *;
+
+#projects {
+  .pagination {
+    width: 100%;
+    padding: rem(12);
+    .page {
+      width: 80%;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      .btn {
+        a {
+          background-color: $DarkBlue;
+        }
+      }
+      li {
+        margin: rem(8);
+        a {
+          background-color: $Gray;
+          border-radius: rem(4);
+          width: rem(48);
+          height: rem(40);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $White;
+          transition: 300ms ease-in-out;
+          &:hover {
+            background-color: $DarkBlue;
+            color: $White;
+          }
+        }
+      }
+      li.active {
+        a {
+          background-color: $DarkBlue;
+          color: $White;
+        }
+      }
+    }
+  }
+}

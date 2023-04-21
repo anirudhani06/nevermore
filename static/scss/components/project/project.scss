@@ -1,0 +1,22 @@
+@use '../../utils' as *;
+
+#project {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .single-project {
+    width: 100%;
+    padding: 0 rem(12);
+    display: grid;
+    gap: rem(12);
+    @include breakpoint-up(md) {
+      grid-template-columns: 1fr 2fr;
+    }
+    .left {
+      @include breakpoint-up(md) {
+        grid-column: 2/3;
+        grid-row: 1/2;
+      }
+    }
+  }
+}

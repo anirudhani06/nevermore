@@ -1,0 +1,109 @@
+@use '../../utils' as *;
+#my_account {
+  .profile {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    gap: rem(24);
+    @include breakpoint-down(lr) {
+      padding: 0 rem(12);
+    }
+    @include breakpoint-up(md) {
+      grid-template-columns: 2fr 5fr;
+    }
+  }
+  .right {
+    position: relative;
+    .projects {
+      .title {
+        h3 {
+          font-size: rem(16);
+          color: $DarkGray;
+        }
+        a {
+          background-color: $Tags;
+          color: $White;
+          padding: rem(8) rem(12);
+          border-radius: rem(4);
+          transition: 300ms ease-in-out;
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+      .project {
+        position: relative;
+        padding: rem(12);
+        background-color: $White;
+        border-radius: rem(4);
+        min-height: rem(150);
+        .empty-pro {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          top: 0;
+          left: 0;
+          h1 {
+            color: $Gray;
+          }
+        }
+        .card {
+          display: grid;
+          grid-template-columns: 1fr 2fr 1fr;
+          gap: rem(6);
+          background-color: $White;
+          padding: rem(6);
+          &:not(:last-child) {
+            border-bottom: rem(1) solid $Border;
+          }
+          .img {
+            border-radius: rem(4);
+            overflow: hidden;
+            width: 100%;
+            height: 80%;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          p {
+            margin: 0;
+            line-height: 1.3;
+            color: $Gray;
+          }
+          .btn {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            justify-content: center;
+            a {
+              display: block;
+              background-color: $Blue;
+              width: rem(60);
+              height: rem(32);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: rem(4);
+              color: $White;
+              transition: 300ms ease-in-out;
+              &:hover {
+                opacity: 0.8;
+              }
+              &:first-child {
+                margin-bottom: rem(6);
+              }
+              &:last-child {
+                background-color: $Red;
+                margin-bottom: rem(6);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

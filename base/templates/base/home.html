@@ -1,0 +1,116 @@
+{% extends 'main.html' %} {% block content %}
+
+<main id="home">
+  {% include 'navbar.html' %}
+  <section class="container">
+    <div class="hero wrapper br-4">
+      <div class="text">
+        <h3>
+          CONNECT WITH
+          <span>DEVELOPERS</span>
+          <br />
+          AROUND THE WORLD
+        </h3>
+      </div>
+      <div class="search flex flex-ai-c flex-jc-c">
+        <form action="{% url 'home' %}" class="flex flex-jc-c br-4">
+          <input
+            type="text"
+            placeholder="Search by developer name..."
+            name="q"
+          />
+          <button class="flex flex-ai-c flex-jc-c">
+            <?xml version="1.0" ?><svg
+              class="bi bi-search"
+              fill="#28a17d"
+              height="16"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+              />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section class="developers wrapper flex-g">
+    {% if developers_count == 0 %}
+    <div class="empty-devs flex flex-ai-c flex-jc-c">
+      <h1>Empty Developers</h1>
+    </div>
+    {% else %}
+    <div class="cards">
+      {% for developer in dev %}
+      <div class="card br-4">
+        <div class="profile flex flex-ai-c">
+          <a href="{% url 'profile' developer.username %}" class="img">
+            <img src="{{developer.avatar.url}}" alt="" />
+          </a>
+          <div>
+            <a href="{% url 'profile' developer.username %}"
+              >{{developer.name}}</a
+            >
+            <span class="domain">{{developer.domain}}</span>
+          </div>
+        </div>
+        <div class="content">
+          <p>{{developer.shortBio|truncatewords:60}}</p>
+        </div>
+        <div class="footer">
+          {% for skill in developer.skills_set.all|slice:"5" %}
+          <a href="{% url 'home' %}?skill={{skill}}">{{skill}}</a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+  <section class="pagination wrapper flex flex-ai-c flex-jc-s">
+    <ul class="page">
+      {% if dev.has_previous %}
+      <li class="btn"><a href="{% url 'home' %}?page=1">First</a></li>
+      <li class="btn">
+        <a href="{% url 'home' %}?page={{dev.previous_page_number}}">❮ Prev</a>
+      </li>
+      {% endif %}
+      <br />
+      {% if dev.number|add:'-3' > 1 %}
+      <li class="btn">
+        <a href="{% url 'home' %}?page={{dev.number|add:'-3'}}">...</a>
+      </li>
+      {% endif %} {% for num in num_pages %} {% if dev.number == num %}
+      <li class="active">
+        <a href="{% url 'home' %}?page={{num}}">{{num}}</a>
+      </li>
+      {% elif num > dev.number|add:'-3' and num < dev.number|add:'3'%}
+      <li>
+        <a href="{% url 'home' %}?page={{num}}">{{num}}</a>
+      </li>
+      {% endif %} {% endfor %}
+      <br />
+      {% if dev.paginator.num_pages > dev.number|add:'3' %}
+      <li>
+        <a href="{% url 'home' %}?page={{dev.number|add:'3'}}">...</a>
+      </li>
+      <li>
+        <a href="{% url 'home' %}?page={{dev.paginator.num_pages}}"
+          >{{dev.paginator.num_pages}}</a
+        >
+      </li>
+      {% endif %} {% if dev.has_next %}
+      <li class="btn">
+        <a href="{% url 'home' %}?page={{dev.next_page_number}}">Next ❯</a>
+      </li>
+      <li class="btn">
+        <a href="{% url 'home' %}?page={{dev.paginator.num_pages}}">Last</a>
+      </li>
+      {% endif %}
+    </ul>
+  </section>
+</main>
+{% endblock %}

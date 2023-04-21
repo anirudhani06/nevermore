@@ -1,0 +1,29 @@
+{% extends 'main.html' %} {% block content %}
+<main id="register">
+  <div class="container">
+    <div class="card">
+      <h1 class="title">Account Register</h1>
+      <h3>Create a new developer account</h3>
+
+      <form action="" method="post">
+        {% for field in form %}
+        <label for="">{{field.label}}</label>
+        {% for error in field.errors %}
+        <small
+          style="margin: 8px 0; display: block; color: red; font-size: 12px"
+          >{{error}}</small
+        >
+        {% endfor %} {{field}} {% endfor %}
+
+        <div class="footer">
+          <button>Register</button>
+        </div>
+        <div class="login">
+          <p>Already have an account?</p>
+          <a href="{% url 'login' %}">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %}

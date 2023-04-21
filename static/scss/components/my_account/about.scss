@@ -1,0 +1,31 @@
+@use '../../utils' as *;
+#my_account {
+  .profile {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    gap: rem(24);
+    @include breakpoint-down(lr) {
+      padding: 0 rem(12);
+    }
+    @include breakpoint-up(md) {
+      grid-template-columns: 2fr 5fr;
+    }
+  }
+  .right {
+    position: relative;
+    .about {
+      .title {
+        h3 {
+          font-size: $f-16;
+          color: $DarkGray;
+        }
+      }
+      p {
+        color: $Gray;
+        letter-spacing: 0.5px;
+        line-height: 1.3;
+      }
+    }
+  }
+}

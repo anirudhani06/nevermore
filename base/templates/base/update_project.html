@@ -1,0 +1,42 @@
+{% extends 'main.html' %} {% block content %}
+<main id="create_project">
+  {% include 'navbar.html' %}
+
+  <section class="project wrapper">
+    <div class="container">
+      <div class="card">
+        <div class="img" id="imagePreview" style="display: block">
+          <img id="preview" src="{{project.image.url}}" alt="" />
+        </div>
+        <form action="" method="post" enctype="multipart/form-data">
+          <label for="">Image</label>
+          <input type="file" onchange="previewImage(event)" name="image" />
+          <label for="">Title</label>
+          <input type="text" name="title" required value="{{project.title}}" />
+          <label for="">Source Code</label>
+          <input type="text" name="sourceCode" value="{{project.sourceCode}}" />
+          <label for="">Tools & Stack</label>
+          <input type="text" name="tags" value="{{tags}}" />
+
+          <label for="">About The Project</label>
+          {{form.media}} {{form.body}}
+          <div class="footer flex flex-ai-c flex-jc-sb">
+            <button>Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  const previewImage = (event) => {
+    if (event.target.files.length > 0) {
+      let src = URL.createObjectURL(event.target.files[0]);
+      let preview = document.getElementById('preview');
+      preview.src = src;
+      document.getElementById('imagePreview').style.display = 'block';
+    }
+  };
+</script>
+{% endblock %}

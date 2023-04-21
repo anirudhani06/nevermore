@@ -1,0 +1,82 @@
+@use '../../utils' as *;
+
+#forget_password {
+  .container {
+    padding: rem(32);
+    @include breakpoint-down(lr) {
+      padding: rem(32) rem(12);
+    }
+    .card {
+      padding: rem(32);
+      border-radius: rem(4);
+      background-color: $White;
+      border: rem(1) solid $Border;
+      max-width: rem(700);
+      margin: 0 auto;
+      .title {
+        font-size: $f-32;
+        text-align: center;
+        @include breakpoint-down(md) {
+          font-size: $f-26;
+        }
+      }
+      h3 {
+        text-align: center;
+        font-weight: 500;
+        color: $Gray;
+        font-size: $f-18;
+        margin: 0;
+      }
+      form {
+        width: 100%;
+        label {
+          margin: rem(12) 0;
+          display: block;
+          font-size: $f-16;
+        }
+        input {
+          width: 100%;
+          display: block;
+          padding: rem(12) rem(16);
+          outline: none;
+          border: rem(1) solid $Border;
+          border-radius: rem(4);
+          color: $Gray;
+          &:first-child {
+            margin-bottom: rem(12);
+          }
+        }
+        .footer {
+          padding: rem(12) 0;
+          button {
+            background: $Blue;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            color: $White;
+            padding: rem(12) rem(40);
+            border-radius: rem(4);
+            transition: 300ms ease-in-out;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+          a {
+            color: $Blue;
+            text-decoration: underline;
+            font-size: $f-14;
+          }
+        }
+        .register {
+          p {
+            font-size: $f-14;
+          }
+          a {
+            font-size: $f-16;
+            color: $Blue;
+          }
+        }
+      }
+    }
+  }
+}

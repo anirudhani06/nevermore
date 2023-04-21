@@ -1,0 +1,105 @@
+@use '../../utils' as *;
+
+#projects {
+  .project {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: rem(32) 0;
+    @include breakpoint-down(lr) {
+      padding: rem(32) rem(12);
+    }
+    .empty-projects {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      h1 {
+        color: $Gray;
+        font-size: $f-26;
+      }
+    }
+    .projects {
+      display: grid;
+      gap: rem(12);
+      @include breakpoint-up(sm) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @include breakpoint-up(lr) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: rem(16);
+      }
+
+      .card {
+        background-color: $White;
+        border: rem(1) solid $Border;
+        padding-bottom: rem(12);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .pro {
+          .img {
+            width: 100%;
+            height: rem(280);
+            @include breakpoint-down(xsm) {
+              height: rem(240);
+            }
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+        .content {
+          padding: rem(8) rem(16);
+          flex-grow: 1;
+          .title {
+            padding: rem(8) 0;
+            a {
+              font-size: $f-18;
+              font-weight: 600;
+              color: $DarkBlue;
+            }
+          }
+          p {
+            color: $Gray;
+            font-style: italic;
+            a {
+              color: $Green;
+              font-size: $f-16;
+            }
+            span {
+              font-size: $f-14;
+              color: $Gray;
+            }
+          }
+          span {
+            font-size: $f-14;
+            font-weight: 400;
+            color: $Tags;
+          }
+        }
+        .footer {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          flex-wrap: wrap;
+          margin-bottom: 0;
+          a {
+            background-color: $Tags;
+            color: $White;
+            padding: rem(6);
+            margin: rem(6);
+            border-radius: rem(4);
+            transition: 300ms ease-in-out;
+            &:hover {
+              background-color: $DarkBlue;
+            }
+          }
+        }
+      }
+    }
+  }
+}

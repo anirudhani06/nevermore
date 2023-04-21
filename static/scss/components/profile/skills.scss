@@ -1,0 +1,99 @@
+@use '../../utils' as *;
+
+#profile {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .profile {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    gap: rem(24);
+    @include breakpoint-down(lr) {
+      padding: 0 rem(12);
+    }
+    @include breakpoint-up(md) {
+      grid-template-columns: 2fr 5fr;
+    }
+    .right {
+      position: relative;
+      .skill {
+        .title {
+          h3 {
+            font-size: $f-16;
+            color: $DarkGray;
+          }
+          a {
+            background-color: $DarkBlue;
+            color: $White;
+            padding: rem(8) rem(12);
+            border-radius: rem(4);
+            transition: 300ms ease-in-out;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+        .skills {
+          position: relative;
+          border-radius: rem(4);
+          min-height: rem(150);
+          .empty-skills {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            h1 {
+              color: $Gray;
+            }
+          }
+
+          .card {
+            display: grid;
+            @include breakpoint-up(md) {
+              grid-template-columns: 1fr 5fr;
+            }
+            gap: rem(12);
+            &:not(:last-child) {
+              margin-bottom: rem(12);
+            }
+            span {
+              font-size: $f-16;
+              color: $Gray;
+            }
+            p {
+              margin: 0;
+              word-spacing: 5px;
+              color: $Gray;
+              line-height: 1.5;
+            }
+          }
+        }
+      }
+      .other-skills {
+        .title {
+          h3 {
+            font-size: $f-16;
+            color: $DarkGray;
+          }
+        }
+        .other {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: start;
+          span {
+            margin: rem(8);
+            background-color: $Tags;
+            color: $White;
+            padding: rem(8) rem(16);
+            border-radius: rem(4);
+          }
+        }
+      }
+    }
+  }
+}

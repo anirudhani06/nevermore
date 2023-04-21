@@ -1,0 +1,62 @@
+{% extends 'main.html' %} {% block content %}
+<main id="update_profile">
+  {% include 'navbar.html' %}
+  <section class="container wrapper" style="padding-bottom: 32px">
+    <div class="card">
+      <h1 class="title">Update Profile</h1>
+      <form action="" method="post" enctype="multipart/form-data">
+        <div class="left">
+          <div class="img">
+            <img src="{{profile.avatar.url}}" alt="" id="previewImage" />
+          </div>
+          <label for="">Profile Photo</label>
+          <input type="file" name="avatar" onchange="profilePic(event)" />
+          <label for="">Name</label>
+          <input type="text" value="{{profile.name}}" name="name" />
+          <label for="">Username</label>
+          <input type="text" value="{{profile.username}}" name="username" />
+          <label for="">Domain</label>
+          <input type="text" value="{{profile.domain}}" name="domain" />
+          <label for="">Email</label>
+          <input type="text" value="{{profile.email}}" name="email" />
+          <label for="">Location</label>
+          <input type="text" value="{{profile.location}}" name="location" />
+        </div>
+        <div class="right">
+          <label for="">Short Bio</label>
+          <textarea name="shortBio" id="" cols="30" rows="10">
+{{profile.shortBio}}</textarea
+          >
+          <label for="">About</label>
+          <textarea name="about" id="" cols="30" rows="10">
+{{profile.about}}</textarea
+          >
+          <div class="footer flex flex-ai-c flex-jc-sb">
+            <button
+              type="submit
+              "
+            >
+              Update
+            </button>
+            <div>
+              <a href="{% url 'change-password' %}">Change Password</a>
+              <a href="{% url 'delete-my-account' request.user.profile.id %}"
+                >Delete My Account</a
+              >
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+<script>
+  const profilePic = (event) => {
+    if (event.target.files.length > 0) {
+      let src = URL.createObjectURL(event.target.files[0]);
+      let preview = document.getElementById('previewImage');
+      preview.src = src;
+    }
+  };
+</script>
+{% endblock %}

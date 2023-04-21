@@ -1,0 +1,95 @@
+@use '../../utils' as *;
+
+#profile {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .profile {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    gap: rem(24);
+    @include breakpoint-down(lr) {
+      padding: 0 rem(12);
+    }
+    @include breakpoint-up(md) {
+      grid-template-columns: 2fr 5fr;
+    }
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      .card {
+        width: 100%;
+        border: rem(1) solid $Border;
+        background-color: $White;
+        padding: rem(12);
+        .content {
+          margin-top: rem(20);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          .img {
+            width: rem(220);
+            height: rem(220);
+            border-radius: 50%;
+            overflow: hidden;
+            border: rem(3) solid $DarkBlue;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          h3 {
+            font-size: $f-18;
+            font-weight: 600;
+            margin: 0;
+            margin: rem(8) 0;
+            color: $DarkBlue;
+            @include breakpoint-up(lr) {
+              font-size: $f-26;
+            }
+          }
+          .short-bio {
+            span {
+              font-size: $f-16;
+              color: $Gray;
+            }
+          }
+          span {
+            margin-top: rem(12);
+            font-size: $f-14;
+            color: $Gray;
+          }
+        }
+        .footer {
+          text-align: center;
+          padding: rem(20) 0;
+          a {
+            display: inline-block;
+            background-color: $DarkBlue;
+            padding: rem(12) rem(18);
+            color: $White;
+            transition: 300ms ease-in-out;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+      }
+    }
+    .right {
+      position: relative;
+
+      .projects {
+        .title {
+          h3 {
+            font-size: rem(16);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,113 @@
+@use '../../utils' as *;
+
+#profile {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .profile {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    gap: rem(24);
+    @include breakpoint-down(lr) {
+      padding: 0 rem(12);
+    }
+    @include breakpoint-up(md) {
+      grid-template-columns: 2fr 5fr;
+    }
+    .right {
+      position: relative;
+
+      .projects {
+        padding-bottom: rem(32);
+        .title {
+          h3 {
+            color: $DarkGray;
+            font-size: $f-16;
+          }
+        }
+        .project {
+          position: relative;
+          display: grid;
+          gap: rem(12);
+          @include breakpoint-up(sm) {
+            grid-template-columns: 1fr 1fr;
+          }
+          .empty-pro {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            h1 {
+              color: $Gray;
+            }
+          }
+
+          .card {
+            background-color: $White;
+            border: rem(1) solid $Border;
+            border-radius: rem(4);
+            overflow: hidden;
+            .img {
+              display: block;
+              width: 100%;
+              //   height: rem(280);
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .title {
+              padding: rem(6) rem(12);
+              a {
+                color: $DarkBlue;
+                font-size: rem(16);
+                font-weight: 600;
+              }
+            }
+
+            .author {
+              padding: 0 rem(12);
+              font-size: $f-14;
+              span {
+                font-style: italic;
+                a {
+                  color: $Green;
+                  font-size: $f-16;
+                }
+              }
+              span {
+                color: $Gray;
+              }
+            }
+            p {
+              font-size: $f-16;
+              padding: 0 rem(12);
+              color: $DarkGray;
+            }
+            .stack {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: start;
+              a {
+                margin: rem(8);
+                background-color: $Tags;
+                color: $White;
+                padding: rem(8) rem(16);
+                border-radius: rem(4);
+                transition: 300ms ease-in-out;
+                &:hover {
+                  background-color: $DarkBlue;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

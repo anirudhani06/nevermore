@@ -1,0 +1,53 @@
+{% load static %}
+<header>
+  <nav class="navbar wrapper flex flex-ai-c flex-jc-sb">
+    <a href="{% url 'home' %}" class="logo">
+      <img src="{% static '/assets/icons/logo.png' %}" alt="" />
+    </a>
+    <div class="hamburger for-mobile">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="overlay for-mobile"></div>
+    <ul class="mobile-links br-4 for-mobile">
+      <li><a href="{% url 'home' %}">Developers</a></li>
+      <li><a href="{% url 'projects' %}">Projects</a></li>
+      <li><a href="{% url 'inbox' %}">Inbox</a></li>
+      <li><a href="{% url 'my-account' %}">My Account</a></li>
+      <li><a href="{% url 'update-profile' %}">Settings</a></li>
+      {% if request.user.is_authenticated %}
+      <li><a href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+      <li><a href="{% url 'login' %}">Login</a></li>
+      {% endif %}
+    </ul>
+    <ul class="links flex flex-ai-c flex-jc-sb for-desktop">
+      <li class="link"><a href="{% url 'home' %}">Developers</a></li>
+      <li class="link"><a href="{% url 'projects' %}">Projects</a></li>
+      <li class="link"><a href="{% url 'inbox' %}">Inbox</a></li>
+      <li class="link"><a href="{% url 'my-account' %}">My Account</a></li>
+      <li>
+        <svg
+          id="drop-down"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 32 32"
+        >
+          <title>chevron-down</title>
+          <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+        </svg>
+      </li>
+      <ul class="drop-down-links br-4">
+        <li><a href="{% url 'update-profile' %}">Settings</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </ul>
+  </nav>
+</header>

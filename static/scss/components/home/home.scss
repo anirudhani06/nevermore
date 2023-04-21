@@ -1,0 +1,11 @@
+@use '../../utils' as *;
+#home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .container {
+    @include breakpoint-down(lr) {
+      padding: 0 rem(12);
+    }
+  }
+}

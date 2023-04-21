@@ -1,0 +1,92 @@
+@use '../../utils' as *;
+
+#home {
+  .developers {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: rem(32) 0;
+    @include breakpoint-down(lr) {
+      padding: rem(32) rem(12);
+    }
+    .empty-devs {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      h1 {
+        color: $Gray;
+        font-size: $f-26;
+      }
+    }
+    .cards {
+      display: grid;
+      gap: rem(12);
+      @include breakpoint-up(sm) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @include breakpoint-up(lr) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: rem(16);
+      }
+
+      .card {
+        padding: rem(16) rem(22);
+        background-color: $White;
+        border: rem(1) solid $Border;
+        display: flex;
+        flex-direction: column;
+        min-height: rem(250);
+        .profile {
+          .img {
+            width: rem(50);
+            height: rem(50);
+            border-radius: 50%;
+            overflow: hidden;
+            border: rem(3) solid $Tags;
+            margin-right: rem(12);
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          a {
+            display: block;
+            font-size: $f-16;
+            color: $DarkBlue;
+            font-weight: 600;
+          }
+          span {
+            color: $Gray;
+          }
+        }
+        .content {
+          padding: rem(8) 0;
+          flex-grow: 1;
+          p {
+            margin: 0;
+            color: $Gray;
+            word-spacing: rem(5);
+          }
+        }
+        .footer {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          a {
+            background-color: $Tags;
+            padding: rem(6);
+            border-radius: rem(4);
+            margin: rem(6);
+            color: $White;
+            transition: 300ms ease-in-out;
+            &:hover {
+              background-color: $DarkBlue;
+            }
+          }
+        }
+      }
+    }
+  }
+}

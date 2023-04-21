@@ -1,0 +1,23 @@
+{% extends 'main.html' %} {% block content %}
+<main id="message">
+  {% include 'navbar.html' %}
+
+  <section class="message-box wrapper flex-g">
+    <div class="content">
+      <a href="" class="img">
+        <img src="{{message.sender.avatar.url}}" alt="" />
+      </a>
+      <div class="title">
+        <h1>{{message.subject}}</h1>
+      </div>
+      <div class="sender">
+        <a href="">{{message.sender.name}}</a
+        ><span>{{message.createdAt|timesince}} ago</span>
+      </div>
+      <div class="body">
+        <p>{{message.body}}</p>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

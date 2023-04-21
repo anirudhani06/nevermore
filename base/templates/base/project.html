@@ -1,0 +1,185 @@
+{% extends 'main.html' %}{% load static %} {% block content %}
+
+<style>
+  .like span img {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+  }
+  .like span:first-child {
+    margin-right: 12px;
+  }
+  .body_para li {
+    list-style: decimal;
+    list-style: circle;
+  }
+</style>
+
+<main id="project">
+  {% include 'navbar.html' %}
+  <section class="single-project wrapper flex-g">
+    <div class="left">
+      <div class="project">
+        <div class="img">
+          <img src="{{project.image.url}}" alt="" />
+        </div>
+        <div class="head">
+          <div class="author flex flex-ai-c flex-jc-sb">
+            <a href="{% url 'profile' project.owner.username %}"
+              >@{{project.owner.username}}</a
+            >
+            <span class="timestamp">{{project.createdAt|timesince}} ago</span>
+          </div>
+          <div class="title">
+            <h3>{{project.title}}</h3>
+          </div>
+        </div>
+        <div class="about">
+          <h4>ABOUT THE PROJECT</h4>
+          <div class="body_para">{{project.body|safe}}</div>
+        </div>
+        <div class="like">
+          <span>
+            {% if request.user.profile in project.likes.all %}
+            <img
+              src="{% static '/assets/icons/icons8-facebook-like-50 (1).png' %}"
+              alt=""
+              onclick="like('{{project.id}}',event)"
+            />
+            {% else %}
+            <img
+              src="{% static '/assets/icons/icons8-facebook-like-50.png' %}"
+              alt=""
+              onclick="like('{{project.id}}',event)"
+            />
+            {% endif %}
+          </span>
+          <span>
+            {% if request.user.profile in project.dislikes.all %}
+            <img
+              src="{% static '/assets/icons/icons8-facebook-like-50 (3).png' %}"
+              alt=""
+              onclick="dislike('{{project.id}}',event)"
+            />
+
+            {% else %}
+            <img
+              src="{% static '/assets/icons/icons8-facebook-like-50 (2).png' %}"
+              alt=""
+              onclick="dislike('{{project.id}}',event)"
+            />
+
+            {% endif %}
+          </span>
+        </div>
+
+        <div class="feedback">
+          <h4>FEEDBACK</h4>
+          <p>
+            <span id="feedback_count">{{project.feedback|floatformat:0}}</span>%
+            Positive Feedback (<span id="like_count"
+              >{{project.total_likes}}</span
+            >
+            Likes)
+          </p>
+        </div>
+        <div class="comment">
+          <form action="" method="post">
+            {{form.body}}
+            <button>Comment</button>
+          </form>
+        </div>
+        <div class="comments br-4">
+          {% for comment in comments %}
+          <div class="card">
+            <div class="top flex flex-ai-c flex-jc-sb">
+              <a href="{% url 'profile' comment.owner.username %}"
+                >@{{comment.owner}}</a
+              >
+              <span>{{comment.createdAt|timesince}} ago</span>
+            </div>
+            <p>{{comment.body}}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="title"><h4>Tools & Stack</h4></div>
+      <div class="tools">
+        {% for tag in project.tags.all %}
+        <a href="{% url 'projects' %}?tag={{tag}}">{{tag}}</a>
+        {% endfor %}
+      </div>
+      <div class="source-code flex flex-ai-c flex-jc-sb">
+        <a href="{{project.sourceCode}}" target="_blank">Source Code</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="{% static '/js/jquery.js' %}"></script>
+<script>
+  const like = (projectId, event) => {
+    event.preventDefault();
+    let likes = document.querySelector('.like');
+    let like_count = document.querySelector('#like_count');
+    let feedback_count = document.querySelector('#feedback_count');
+    id = { id: projectId };
+    $.ajax({
+      url: "{% url 'like' %}",
+      type: 'POST',
+      data: id,
+      success: (data) => {
+        likes.innerHTML = `<span>  
+            <img
+              src="{% static '/assets/icons/icons8-facebook-like-50 (1).png' %}"
+              alt=""
+              onclick="like('{{project.id}}',event)"
+            />
+          </span>
+          <span>
+            <img
+              src="{% static '/assets/icons/icons8-facebook-like-50 (2).png' %}"
+              alt=""
+              onclick="dislike('{{project.id}}',event)"
+            />
+          </span>`;
+        like_count.innerHTML = data.likes;
+        feedback_count.innerHTML = data.feedback;
+      },
+    });
+  };
+
+  const dislike = (projectId, event) => {
+    event.preventDefault();
+    let likes = document.querySelector('.like');
+    let like_count = document.querySelector('#like_count');
+    let feedback_count = document.querySelector('#feedback_count');
+    id = { id: projectId };
+    $.ajax({
+      url: "{% url 'dislike' %}",
+      type: 'POST',
+      data: id,
+      success: (data) => {
+        likes.innerHTML = `<span>
+            <img
+              src="{% static '/assets/icons/icons8-facebook-like-50.png' %}"
+              alt=""
+              onclick="like('{{project.id}}',event)"
+            /> 
+          </span>
+          <span> 
+            <img
+              src="{% static '/assets/icons/icons8-facebook-like-50 (3).png' %}"
+              alt=""
+              onclick="dislike('{{project.id}}',event)"
+            />
+          </span>`;
+        like_count.innerHTML = data.likes;
+        feedback_count.innerHTML = data.feedback;
+      },
+    });
+  };
+</script>
+{% endblock %}

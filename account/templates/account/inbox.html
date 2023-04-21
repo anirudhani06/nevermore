@@ -1,0 +1,32 @@
+{% extends 'main.html' %} {% block content %}
+<main id="inbox">
+  {% include 'navbar.html' %}
+
+  <section class="mail wrapper flex-g">
+    <div class="title">
+      <h1>NEW MESSAGES (<span>{{new_messages_count}}</span>)</h1>
+    </div>
+    <div class="messages">
+      <ul>
+        {% if msg_count == 0 %}
+        <li class="empty-inbox">Empty Inbox</li>
+        {% else %} {% for msg in messages %} {% if msg.is_read %}
+        <li class="viewed">
+          <a href="{% url 'message' msg.id %}"
+            ><span>{{msg.sender}}</span><span>{{msg.subject}}</span
+            ><span>{{msg.createdAt|timesince}} ago</span></a
+          >
+        </li>
+        {% else %}
+        <li>
+          <a href="{% url 'message' msg.id %}"
+            ><span>{{msg.sender}}</span><span>{{msg.subject}}</span
+            ><span>{{msg.createdAt|timesince}} ago</span></a
+          >
+        </li>
+        {% endif %} {% endfor %} {% endif %}
+      </ul>
+    </div>
+  </section>
+</main>
+{% endblock %}

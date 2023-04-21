@@ -1,0 +1,53 @@
+@use '../utils' as *;
+
+.wrapper {
+  max-width: rem(1200);
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+  &-jc-c {
+    justify-content: center;
+  }
+  &-jc-s {
+    justify-content: flex-start;
+  }
+  &-d-c {
+    flex-direction: column;
+  }
+  &-g {
+    flex-grow: 1;
+  }
+  &-jc-sb {
+    justify-content: space-between;
+  }
+  &-jc-e {
+    justify-content: flex-end;
+  }
+  &-ai-s {
+    align-items: flex-start;
+  }
+  &-jc-sa {
+    justify-content: space-around;
+  }
+  &-ai-c {
+    align-items: center;
+  }
+}
+
+.br-4 {
+  border-radius: rem(4);
+}
+
+.for-mobile {
+  @include breakpoint-up(md) {
+    display: none;
+  }
+}
+
+.for-desktop {
+  @include breakpoint-down(sm) {
+    display: none;
+  }
+}

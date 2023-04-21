@@ -1,0 +1,59 @@
+@use '../../utils' as *;
+
+#inbox {
+  .mail {
+    width: 100%;
+    @include breakpoint-down(lr) {
+      padding: 0 rem(12);
+    }
+    .title {
+      max-width: rem(800);
+      margin: 0 auto;
+      h1 {
+        span {
+          color: $Green;
+        }
+      }
+    }
+    .messages {
+      background: $White;
+      max-width: rem(800);
+      margin: 0 auto;
+      border-radius: rem(4);
+      border: rem(1) solid $Border;
+      @include breakpoint-up(md) {
+        padding: rem(12);
+      }
+      ul {
+        li {
+          padding: rem(32);
+          &:not(:last-child) {
+            border-bottom: rem(1) solid $Border;
+          }
+          a {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            span {
+              @include breakpoint-up(md) {
+                font-size: $f-14;
+              }
+              color: $DarkBlue;
+              font-weight: 600;
+            }
+          }
+        }
+        li.viewed {
+          a {
+            span {
+              color: $Gray;
+            }
+          }
+        }
+        .empty-inbox {
+          font-size: $f-26;
+          color: $Gray;
+        }
+      }
+    }
+  }
+}

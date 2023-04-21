@@ -1,0 +1,6 @@
+@use '../../utils' as *;
+#my-account {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

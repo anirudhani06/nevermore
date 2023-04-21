@@ -1,0 +1,6 @@
+@use '../../utils' as *;
+#inbox {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

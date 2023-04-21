@@ -1,0 +1,11 @@
+@use '../../utils' as *;
+
+#login {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding-top: rem(32);
+  @include breakpoint-down(lr) {
+    padding: rem(32) rem(12);
+  }
+}

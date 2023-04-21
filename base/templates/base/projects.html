@@ -1,0 +1,124 @@
+{% extends 'main.html' %} {% block content %}
+<main id="projects">
+  {% include 'navbar.html' %}
+  <section class="container">
+    <div class="hero wrapper br-4">
+      <div class="text">
+        <h3>
+          SEARCH FOR
+          <span>PROJECTS</span>
+        </h3>
+      </div>
+      <div class="search flex flex-ai-c flex-jc-c">
+        <form action="" class="flex flex-jc-c br-4">
+          <input type="text" placeholder="Search by project name..." name="q" />
+          <button class="flex flex-ai-c flex-jc-c">
+            <?xml version="1.0" ?><svg
+              class="bi bi-search"
+              fill="#28a17d"
+              height="16"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+              />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section class="project wrapper flex-g">
+    {% if project_count == 0 %}
+    <div class="empty-projects flex flex-ai-c flex-jc-c">
+      <h1>Empty Projects</h1>
+    </div>
+    {% else %}
+    <div class="projects">
+      {% for project in projects %}
+      <div class="card br-4">
+        <div class="pro flex flex-ai-c">
+          <a href="{% url 'project' project.id %}" class="img">
+            <img src="{{project.image.url}}" alt="" />
+          </a>
+        </div>
+        <div class="content">
+          <div class="title">
+            <a href="">{{project.title}}</a>
+          </div>
+          <p class="flex flex-ai-c flex-jc-sb">
+            <span
+              >By
+              <a href="{% url 'profile' project.owner.username %}"
+                >{{project.owner.name}}</a
+              ></span
+            >
+            <span>{{project.createdAt|timesince}} ago</span>
+          </p>
+          <span
+            >{{project.feedback}}% Positive Feedback ({{project.total_likes}}
+            Likes)</span
+          >
+        </div>
+        <div class="footer">
+          {% for tag in project.tags.all|slice:'5' %}
+          <a href="{% url 'projects' %}?tag={{tag}}">{{tag}}</a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+  <section class="pagination wrapper flex flex-ai-c flex-jc-s">
+    <ul class="page">
+      {% if projects.has_previous %}
+      <li class="btn"><a href="{% url 'projects' %}?page=1">First</a></li>
+      <li class="btn">
+        <a href="{% url 'projects' %}?page={{projects.previous_page_number}}"
+          >❮ Prev</a
+        >
+      </li>
+      {% endif %}
+      <br />
+      {% if projects.number|add:'-4' > 1 %}
+      <li class="btn">
+        <a href="{% url 'projects' %}?page={{projects.number|add:'-4'}}">...</a>
+      </li>
+      {% endif %} {% for num in num_pages %} {% if projects.number == num %}
+      <li class="active">
+        <a href="{% url 'projects' %}?page={{num}}">{{num}}</a>
+      </li>
+      {% elif num > projects.number|add:'-4' and num < projects.number|add:'4'%}
+      <li>
+        <a href="{% url 'projects' %}?page={{num}}">{{num}}</a>
+      </li>
+      {% endif %} {% endfor %}
+      <br />
+      {% if projects.paginator.num_pages > projects.number|add:'4' %}
+      <li>
+        <a href="{% url 'projects' %}?page={{projects.number|add:'4'}}">...</a>
+      </li>
+      <li>
+        <a href="{% url 'projects' %}?page={{projects.paginator.num_pages}}"
+          >{{projects.paginator.num_pages}}</a
+        >
+      </li>
+      {% endif %} {% if projects.has_next %}
+      <li class="btn">
+        <a href="{% url 'projects' %}?page={{projects.next_page_number}}"
+          >Next ❯</a
+        >
+      </li>
+      <li class="btn">
+        <a href="{% url 'projects' %}?page={{projects.paginator.num_pages}}"
+          >Last</a
+        >
+      </li>
+      {% endif %}
+    </ul>
+  </section>
+</main>
+{% endblock %}

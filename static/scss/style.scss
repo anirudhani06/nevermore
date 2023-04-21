@@ -1,0 +1,19 @@
+@use './base';
+@use './animations';
+@use './utils';
+
+@use './components';
+@use './components/home';
+@use './components/my_account';
+@use './components/profile';
+@use './components/update_profile';
+@use './components/project';
+@use './components/projects';
+@use './components/skills';
+@use './components/create_project';
+@use './components/inbox';
+@use './components/message';
+@use './components/change_password';
+@use './components/forget_password';
+@use './components/login';
+@use './components/register';

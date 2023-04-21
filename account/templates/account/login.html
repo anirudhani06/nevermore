@@ -1,0 +1,25 @@
+{% extends 'main.html' %} {% block content %}
+<main id="login">
+  <div class="card">
+    <h1 class="title">Account Login</h1>
+    <h3>Hello Developer. Welcome Back</h3>
+    <form action="" method="post">
+      <label for="">Username</label>
+      {% for msg in messages %}
+      <small style="margin: 8px 0; display: block; color: red; font-size: 12px">{{msg}}</small>
+      {% endfor %}
+      <input type="text" name="username" value="testuser" />
+      <label for="">Password</label>
+      <input type="password" name="password" value="nevermore000" />
+      <div class="footer flex flex-ai-c flex-jc-sb">
+        <button type="submit">Login</button>
+        <a href="{% url 'forget-password' %}">Forgot Password?</a>
+      </div>
+      <div class="register">
+        <p>Don't have an account?</p>
+        <a href="{% url 'register' %}">Register</a>
+      </div>
+    </form>
+  </div>
+</main>
+{% endblock %}

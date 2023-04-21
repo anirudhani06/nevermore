@@ -1,0 +1,52 @@
+@use '../../utils' as *;
+#home {
+  .hero {
+    background-color: $DarkBlue;
+    min-height: rem(240);
+    padding: rem(12);
+    .text {
+      text-align: center;
+      padding: rem(32);
+      h3 {
+        margin: 0;
+        color: $White;
+        font-size: $f-32;
+        font-weight: 400;
+        @include breakpoint-down(sm) {
+          font-size: $f-26;
+        }
+        span {
+          font-weight: 600;
+          color: $Green;
+        }
+      }
+    }
+    .search {
+      form {
+        background: $White;
+        overflow: hidden;
+        padding-right: rem(6);
+        width: rem(300);
+        border: rem(1) solid $Green;
+        input {
+          width: 100%;
+          max-width: rem(300);
+          padding: rem(12) rem(8);
+          border: none;
+          outline: transparent;
+          color: $Gray;
+          font-size: $f-12;
+        }
+        button {
+          background: transparent;
+          outline: none;
+          border: none;
+          cursor: pointer;
+          svg {
+            fill: $Green;
+          }
+        }
+      }
+    }
+  }
+}

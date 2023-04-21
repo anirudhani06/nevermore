@@ -1,0 +1,78 @@
+@use '../../utils' as *;
+
+#create_project {
+  .project {
+    .container {
+      position: relative;
+      z-index: 10;
+      padding: 0 rem(12);
+      padding-bottom: rem(32);
+      .card {
+        background-color: $White;
+        padding: rem(32);
+        border-radius: rem(4);
+        max-width: rem(700);
+        margin: 0 auto;
+        border: 1px solid $Border;
+        .img {
+          position: relative;
+          border-radius: rem(4);
+          overflow: hidden;
+          width: 100%;
+          height: rem(280);
+          display: none;
+          @include breakpoint-up(sm) {
+            height: rem(400);
+          }
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        form {
+          width: 100%;
+          label {
+            margin: rem(12) 0;
+            display: block;
+            font-size: $f-16;
+          }
+          input {
+            width: 100%;
+            display: block;
+            padding: rem(12) rem(16);
+            outline: none;
+            border: rem(1) solid $Border;
+            border-radius: rem(4);
+            color: $Gray;
+            &:first-child {
+              margin-bottom: rem(12);
+            }
+          }
+          textarea {
+            width: 100%;
+            outline: transparent;
+            border: 1px solid $Border;
+            border-radius: rem(4);
+            padding: rem(16);
+          }
+          .footer {
+            padding: rem(12) 0;
+            button {
+              background: $Blue;
+              outline: none;
+              border: none;
+              cursor: pointer;
+              color: $White;
+              padding: rem(12) rem(40);
+              border-radius: rem(4);
+              transition: 300ms ease-in-out;
+              &:hover {
+                opacity: 0.8;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

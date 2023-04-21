@@ -1,0 +1,25 @@
+{% extends 'main.html' %} {% block content %}
+<main id="send_message">
+  {% include 'navbar.html' %}
+
+  <section class="message-box wrapper flex-g">
+    <div class="content">
+      <span class="sendto">Send To</span>
+      <div class="to flex flex-ai-c flex-ai-s">
+        <a href="{% url 'profile' receiver.username %}" class="img">
+          <img src="{{receiver.avatar.url}}" alt="" />
+        </a>
+        <a href="{% url 'profile' receiver.username %}"
+          >@{{receiver.username}}</a
+        >
+      </div>
+      <form action="" method="post">
+        {{form.subject}} {{form.body}}
+        <div class="footer flex flex-ai-c flex-jc-e">
+          <button type="submit">Send</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends 'main.html' %}{% load static %} {% block content %}
+<main id="my_account">
+  {% include 'navbar.html' %}
+
+  <section class="profile wrapper flex-g">
+    <div class="left">
+      <div class="card br-4">
+        <div class="top">
+          <a href="{% url 'update-profile' %}">Edit</a>
+        </div>
+        <div class="content">
+          <div class="img">
+            <img src="{{request.user.profile.avatar.url}}" alt="" />
+          </div>
+          <h3>{{request.user.profile.name}}</h3>
+          <div class="short-bio">
+            <span>{{request.user.profile.domain}}</span>
+          </div>
+          <span>{{request.user.profile.location}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="about">
+        <div class="title"><h3>ABOUT ME</h3></div>
+        <p>{{request.user.profile.about}}</p>
+      </div>
+      <div class="skill">
+        <div class="title flex flex-ai-c flex-jc-sb">
+          <span class="flex flex-ai-c flex-jc-sb">
+            <h3>SKILLS</h3>
+            <span style="margin-left: 12px; font-size: 16px; color: gray">({{skills.count}})</span>
+          </span>
+          <a href="{% url 'add-skill' %}">Add Skill</a>
+        </div>
+        <div class="skills">
+          {% if skills.count == 0 %}
+          <div class="empty-skills">
+            <h1>Empty Skills</h1>
+          </div>
+          {% else %} {% for skill in skills %}
+          <div class="card flex flex-ai-c flex-jc-sb">
+            <div class="left">
+              <span>{{skill.name}}</span>
+              <p>{{skill.description|truncatewords:50}}</p>
+            </div>
+            <div class="right">
+              <a href="{% url 'update-skill' skill.id %}">Edit</a
+              ><a href="" onclick="deleteSkill('{{skill.id}}',event)">Delete</a>
+            </div>
+          </div>
+          {% endfor %} {% endif %}
+        </div>
+      </div>
+      <div class="projects">
+        <div class="title flex flex-ai-c flex-jc-sb">
+          <span class="flex flex-ai-c flex-jc-sb">
+            <h3>PROJECTS</h3>
+            <span style="margin-left: 12px; font-size: 16px; color: gray"
+              >({{projects.count}})</span
+            >
+          </span>
+          <a href="{% url 'add-project' %}">Add Projects</a>
+        </div>
+        <div class="project">
+          {% if projects.count == 0 %}
+          <div class="empty-pro">
+            <h1>Empty Projects</h1>
+          </div>
+          {% else %}
+          <div id="projects_list">
+            {% for project in projects %}
+            <div class="card">
+              <a href="{% url 'project' project.id %}" class="img">
+                <img src="{{project.image.url}}" alt="" />
+              </a>
+              <div>{{project.body|safe|truncatewords:50}}</div>
+              <div class="btn">
+                <a href="{% url 'update-project' project.id %}">Edit</a>
+                <a href="" onclick="deleteProject('{{project.id}}',event)">Delete</a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  const deleteSkill = (skill_id, event) => {
+    let id = { id: skill_id };
+    $.ajax({
+      url: "{% url 'delete-skill' %}",
+      type: 'POST',
+      data: id,
+      success: (data) => {
+        window.location.reload();
+      },
+    });
+  };
+  const deleteProject = (project_id, event) => {
+    let id = { id: project_id };
+    let projects_list = document.querySelector('#projects_list');
+    $.ajax({
+      url: "{% url 'delete-project' %}",
+      type: 'POST',
+      data: id,
+      success: (data) => {
+        projects_list.innerHTML = `{% for project in projects %}
+            <div class="card">
+              <a href="{% url 'project' project.id %}" class="img">
+                <img src="{{project.image.url}}" alt="" />
+              </a>
+              <div>{{project.body|safe|truncatewords:50}}</div>
+              <div class="btn">
+                <a href="{% url 'update-project' project.id %}">Edit</a>
+                <a href="" onclick="deleteProject('{{project.id}}',event)"
+                  >Delete</a
+                >
+              </div>
+            </div>
+            {% endfor %}`;
+      },
+    });
+  };
+</script>
+
+{% endblock %}

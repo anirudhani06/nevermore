@@ -1,0 +1,151 @@
+@use '../../utils' as *;
+
+#project {
+  .single-project {
+    .left {
+      .project {
+        position: relative;
+        border-radius: rem(4);
+        overflow: hidden;
+        @include breakpoint-up(md) {
+          padding-bottom: rem(32);
+        }
+
+        .img {
+          position: relative;
+          width: 100%;
+          border-radius: rem(4);
+          overflow: hidden;
+          height: rem(450);
+          border-radius: rem(4);
+          overflow: hidden;
+          @include breakpoint-down(xsm) {
+            height: rem(280);
+          }
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .head {
+          padding: rem(8) 0;
+          .author {
+            a {
+              font-size: $f-16;
+              color: $Green;
+            }
+            .timestamp {
+              display: block;
+              color: $Gray;
+              font-size: $f-14;
+            }
+          }
+          .title {
+            padding: rem(8) 0;
+            h3 {
+              margin: 0;
+              font-size: $f-26;
+              color: $DarkBlue;
+              @include breakpoint-down(lr) {
+                font-size: $f-18;
+              }
+            }
+          }
+        }
+        .about {
+          border-bottom: 1px solid $Border;
+          h4 {
+            font-size: $f-16;
+            color: $DarkGray;
+            margin: 0;
+            font-weight: normal;
+          }
+          p {
+            word-spacing: 5px;
+            line-height: 1.3;
+            color: $Gray;
+          }
+        }
+        .like {
+          display: flex;
+          align-items: center;
+          justify-content: start;
+          padding: rem(12) 0;
+
+          a {
+            margin-right: rem(12);
+            font-size: $f-14;
+
+            img {
+              width: rem(26);
+              height: rem(26);
+            }
+          }
+        }
+        .feedback {
+          h4 {
+            font-size: $f-16;
+            color: $DarkGray;
+            font-weight: normal;
+          }
+          p {
+            font-size: $f-14;
+            color: $Gray;
+          }
+        }
+        .comment {
+          form {
+            width: 100%;
+            textarea {
+              width: 100%;
+              outline: transparent;
+              border: 1px solid $Border;
+              border-radius: rem(4);
+              padding: rem(12);
+              color: $Gray;
+              background: transparent;
+            }
+            button {
+              padding: rem(12) rem(42);
+              margin-top: rem(8);
+              border: none;
+              outline: transparent;
+              background: $Blue;
+              color: $White;
+              border-radius: rem(4);
+              cursor: pointer;
+              transition: 300ms ease-in-out;
+              &:hover {
+                opacity: 0.8;
+              }
+            }
+          }
+        }
+        .comments {
+          margin-top: rem(12);
+          border: 1px solid $Border;
+          width: 100%;
+          padding: rem(16);
+          .card {
+            margin-bottom: rem(12);
+            &:not(:last-child) {
+              border-bottom: 1px solid $Border;
+            }
+            .top {
+              a {
+                color: $Green;
+                font-size: $f-14;
+              }
+              span {
+                color: $Gray;
+              }
+            }
+            p {
+              color: $Gray;
+            }
+          }
+        }
+      }
+    }
+  }
+}

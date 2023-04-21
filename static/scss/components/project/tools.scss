@@ -1,0 +1,44 @@
+@use '../../utils' as *;
+
+#project {
+  .single-project {
+    .right {
+      padding-bottom: rem(32);
+      @include breakpoint-up(md) {
+        grid-column: 1/2;
+        grid-row: 1/2;
+      }
+      .title {
+        h4 {
+          font-size: $f-16;
+          color: $DarkGray;
+          font-weight: normal;
+        }
+      }
+      .tools {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        a {
+          padding: rem(8) rem(16);
+          background-color: $Tags;
+          margin: rem(8);
+          border-radius: rem(4);
+          color: $White;
+          transition: 300ms ease-in-out;
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+      .source-code {
+        padding: rem(12) 0;
+        a {
+          font-size: $f-14;
+          color: $Blue;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
